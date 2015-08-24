@@ -75,10 +75,9 @@ ELSE( WIN32 OR WIN64 )
     FIND_LIBRARY( MATH_LIBRARY m )
 ENDIF( WIN32 OR WIN64 )
 
-FIND_PACKAGE( glfw3 REQUIRED )
-
-INCLUDE_DIRECTORIES( ${GLFW3_INCLUDE_DIR}
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/../glfw/include # For Tomato
                      ${OPENGL_INCLUDE_DIRS}
+                     "/usr/local/include/freetype2/" # For OSX
                      ${FREETYPE_INCLUDE_DIRS}
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${VS789FIX_INCLUDE_DIR}
@@ -123,7 +122,8 @@ ENDIF()
 TARGET_LINK_LIBRARIES( makefont
                        freetype-gl
                        ${OPENGL_LIBRARY}
-                       ${GLFW3_LIBRARY}
+                       glfw
+                       ${GLFW_LIBRARIES}
                        ${FREETYPE_LIBRARY}
                        ${MATH_LIBRARY})
 
